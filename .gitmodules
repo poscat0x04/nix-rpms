@@ -1,0 +1,4 @@
+[submodule "s2n-tls"]
+	path = s2n-tls
+	url = https://src.fedoraproject.org/rpms/s2n-tls
+	branch = rawhide
