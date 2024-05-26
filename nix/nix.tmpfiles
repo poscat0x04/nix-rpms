@@ -1,0 +1,3 @@
+d /var/nix/gcroots/per-user         1777 root root -
+d /var/nix/profiles/per-user        1777 root root -
+d /var/nix/daemon-socket            0755 root root -

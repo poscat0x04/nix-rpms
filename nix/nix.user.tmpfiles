@@ -1,0 +1,5 @@
+d %h/.nix-defexpr                       -    - - -
+L %h/.nix-defexpr/channels_root         -    - - - /var/nix/profiles/per-user/root/channels
+d /var/nix/profiles/per-user/%u         0755 - - -
+L %h/.nix-profile                       -    - - - /var/nix/profiles/per-user/%u/profile
+d /var/nix/gcroots/per-user/%u          0755 - - -

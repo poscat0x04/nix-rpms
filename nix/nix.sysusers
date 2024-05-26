@@ -1,0 +1,34 @@
+g       nixbld        30000
+
+u       nixbld1       30001:nixbld      "Nix build user 1"      /var/empty
+u       nixbld2       30002:nixbld      "Nix build user 2"      /var/empty
+u       nixbld3       30003:nixbld      "Nix build user 3"      /var/empty
+u       nixbld4       30004:nixbld      "Nix build user 4"      /var/empty
+u       nixbld5       30005:nixbld      "Nix build user 5"      /var/empty
+u       nixbld6       30006:nixbld      "Nix build user 6"      /var/empty
+u       nixbld7       30007:nixbld      "Nix build user 7"      /var/empty
+u       nixbld8       30008:nixbld      "Nix build user 8"      /var/empty
+u       nixbld9       30009:nixbld      "Nix build user 9"      /var/empty
+u       nixbld10      30010:nixbld      "Nix build user 10"     /var/empty
+u       nixbld11      30011:nixbld      "Nix build user 11"     /var/empty
+u       nixbld12      30012:nixbld      "Nix build user 12"     /var/empty
+u       nixbld13      30013:nixbld      "Nix build user 13"     /var/empty
+u       nixbld14      30014:nixbld      "Nix build user 14"     /var/empty
+u       nixbld15      30015:nixbld      "Nix build user 15"     /var/empty
+u       nixbld16      30016:nixbld      "Nix build user 16"     /var/empty
+u       nixbld17      30017:nixbld      "Nix build user 17"     /var/empty
+u       nixbld18      30018:nixbld      "Nix build user 18"     /var/empty
+u       nixbld19      30019:nixbld      "Nix build user 19"     /var/empty
+u       nixbld20      30020:nixbld      "Nix build user 20"     /var/empty
+u       nixbld21      30021:nixbld      "Nix build user 21"     /var/empty
+u       nixbld22      30022:nixbld      "Nix build user 22"     /var/empty
+u       nixbld23      30023:nixbld      "Nix build user 23"     /var/empty
+u       nixbld24      30024:nixbld      "Nix build user 24"     /var/empty
+u       nixbld25      30025:nixbld      "Nix build user 25"     /var/empty
+u       nixbld26      30026:nixbld      "Nix build user 26"     /var/empty
+u       nixbld27      30027:nixbld      "Nix build user 27"     /var/empty
+u       nixbld28      30028:nixbld      "Nix build user 28"     /var/empty
+u       nixbld29      30029:nixbld      "Nix build user 29"     /var/empty
+u       nixbld30      30030:nixbld      "Nix build user 30"     /var/empty
+u       nixbld31      30031:nixbld      "Nix build user 31"     /var/empty
+u       nixbld32      30032:nixbld      "Nix build user 32"     /var/empty
