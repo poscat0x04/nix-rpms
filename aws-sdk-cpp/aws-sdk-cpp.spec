@@ -14,7 +14,13 @@ BuildRequires:  aws-c-event-stream-devel
 BuildRequires:  libcurl-devel
 BuildRequires:  openssl-devel
 BuildRequires:  pulseaudio-libs-devel
+
+%if %{?fedora} >= 40
 BuildRequires:  zlib-ng-compat-devel
+%else
+BuildRequires:  zlib-devel
+%endif
+
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
 
