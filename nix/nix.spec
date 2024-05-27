@@ -38,10 +38,14 @@ BuildRequires:  gc-devel >= 8.2.5
 BuildRequires:  libarchive-devel
 BuildRequires:  libcurl-devel
 BuildRequires:  libseccomp-devel
+
+%if "%{?__isa}" == "x86-64"
 BuildRequires:  libcpuid-devel
+%endif
+
 BuildRequires:  libsodium-devel
 BuildRequires:  libgit2-devel
-BuildRequires:  nlohmann-json-devel
+BuildRequires:  json-devel
 BuildRequires:  sqlite-devel
 
 Requires:       %{name}-libs = %{version}-%{release}
