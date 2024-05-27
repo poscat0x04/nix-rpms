@@ -3,7 +3,7 @@
 %global modulename nix
 
 Name:           nix
-Version:        2.21.2
+Version:        2.22.1
 Release:        %autorelease
 Summary:        Nix, the purely functional package manager
 
@@ -41,7 +41,7 @@ BuildRequires:  editline-devel
 BuildRequires:  gc-devel >= 8.2.5
 BuildRequires:  libarchive-devel
 BuildRequires:  libcurl-devel
-BuildRequires:  libseccomp-devel
+BuildRequires:  libseccomp-devel >= 2.5.5
 
 %if "%{?__isa}" == "x86-64"
 BuildRequires:  libcpuid-devel
