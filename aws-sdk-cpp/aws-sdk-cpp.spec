@@ -39,7 +39,13 @@ Requires:       aws-c-event-stream-devel
 Requires:       libcurl-devel
 Requires:       openssl-devel
 Requires:       pulseaudio-libs-devel
-Requires:       zlib-ng-compat-devel
+
+%if %{?fedora} >= 40
+Requires:  zlib-ng-compat-devel
+%else
+Requires:  zlib-devel
+%endif
+
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
