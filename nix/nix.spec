@@ -1,4 +1,6 @@
 %global __brp_check_rpaths %{nil}
+%global selinuxtype targeted
+%global modulename nix
 
 Name:           nix
 Version:        2.21.2
@@ -11,6 +13,8 @@ Source0:        %{URL}/archive/refs/tags/%{VERSION}.tar.gz
 Source1:        nix.sysusers
 Source2:        nix.user.tmpfiles
 Source3:        nix.tmpfiles
+# selinux policy module
+Source4:        https://github.com/DeterminateSystems/nix-installer/raw/main/src/action/linux/selinux/nix.pp
 
 BuildRequires:  gcc-c++
 BuildRequires:  autoconf-archive
@@ -48,7 +52,11 @@ BuildRequires:  libgit2-devel
 BuildRequires:  json-devel
 BuildRequires:  sqlite-devel
 
+# selinux macros
+BuildRequires:  selinux-policy
+
 Requires:       %{name}-libs = %{version}-%{release}
+Requires:       (%{name}-selinux = %{version}-%{release} if selinux-policy-%{selinuxtype})
 
 Requires(post):  systemd
 Requires(preun): systemd
@@ -69,9 +77,19 @@ Library files for %{name}
 Summary:        Development files for %{name}
 Requires:       %{name}-libs = %{version}-%{release}
 
-
 %description devel
 Header files, libraries and pkg-config files for %{name}-libs
+
+
+%package selinux
+Summary:        SELinux policies for Nix
+Requires:       selinux-policy-%{selinuxtype}
+Requires(post): selinux-policy-%{selinuxtype}
+%{?selinux_requires}
+
+%description selinux
+SELinux policy modules for Nix
+
 
 
 %prep
@@ -100,6 +118,7 @@ rm %{buildroot}%{_tmpfilesdir}/nix-daemon.conf
 install -Dm644 %{SOURCE1} %{buildroot}%{_sysusersdir}/nix.conf
 install -Dm644 %{SOURCE2} %{buildroot}%{_user_tmpfilesdir}/nix.conf
 install -Dm644 %{SOURCE3} %{buildroot}%{_tmpfilesdir}/nix.conf
+install -Dm644 %{SOURCE4} %{buildroot}%{_datadir}/selinux/packages/%{selinuxtype}/%{modulename}.pp
 
 
 %check
@@ -139,6 +158,9 @@ install -Dm644 %{SOURCE3} %{buildroot}%{_tmpfilesdir}/nix.conf
 %{_libdir}/pkgconfig/nix*.pc
 %{_includedir}/nix
 
+%files selinux
+%{_datadir}/selinux/packages/%{selinuxtype}/%{modulename}.pp
+
 
 %post
 # create users and directories
@@ -150,6 +172,24 @@ install -Dm644 %{SOURCE3} %{buildroot}%{_tmpfilesdir}/nix.conf
 
 %preun
 %systemd_preun nix-daemon.service nix-daemon.socket
+
+
+%pre selinux
+%selinux_relabel_pre -s %{selinuxtype}
+
+
+%post selinux
+%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/%{selinuxtype}/%{modulename}.pp
+
+
+%postun selinux
+if [ $1 -eq 0 ]; then
+    %selinux_modules_uninstall -s %{selinuxtype} %{modulename}
+fi
+
+
+%posttrans selinux
+%selinux_relabel_post -s %{selinuxtype}
 
 
 %changelog
