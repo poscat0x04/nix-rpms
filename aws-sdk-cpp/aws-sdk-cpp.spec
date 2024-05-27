@@ -1,5 +1,5 @@
 Name:           aws-sdk-cpp
-Version:        1.11.335
+Version:        1.11.336
 Release:        %autorelease
 Summary:        AWS SDK for C++
 
