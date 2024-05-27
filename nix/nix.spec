@@ -13,8 +13,8 @@ Source0:        %{URL}/archive/refs/tags/%{VERSION}.tar.gz
 Source1:        nix.sysusers
 Source2:        nix.user.tmpfiles
 Source3:        nix.tmpfiles
-# selinux policy module
-Source4:        https://github.com/DeterminateSystems/nix-installer/raw/main/src/action/linux/selinux/nix.pp
+Source4:        nix.te
+Source5:        nix.fc
 
 BuildRequires:  gcc-c++
 BuildRequires:  autoconf-archive
@@ -54,6 +54,9 @@ BuildRequires:  sqlite-devel
 
 # selinux macros
 BuildRequires:  selinux-policy
+# selinux policy
+BuildRequires:  checkpolicy
+BuildRequires:  policycoreutils
 
 Requires:       %{name}-libs = %{version}-%{release}
 Requires:       (%{name}-selinux = %{version}-%{release} if selinux-policy-%{selinuxtype})
@@ -85,7 +88,10 @@ Header files, libraries and pkg-config files for %{name}-libs
 Summary:        SELinux policies for Nix
 Requires:       selinux-policy-%{selinuxtype}
 Requires(post): selinux-policy-%{selinuxtype}
-%{?selinux_requires}
+Requires(post): selinux-policy-base >= 40.20
+Requires(post): libselinux-utils
+Requires(post): policycoreutils
+Requires(post): policycoreutils-python-utils
 
 %description selinux
 SELinux policy modules for Nix
@@ -98,6 +104,11 @@ cp COPYING LICENSE
 
 
 %build
+#build selinux policy
+checkmodule -M -m -c 5 -o %{modulename}.mod %{SOURCE4}
+semodule_package -o %{modulename}.pp -m %{modulename}.mod -f %{SOURCE5}
+
+#build nix
 autoreconf -vfi
 %configure \
 --prefix=%{_prefix} \
@@ -118,7 +129,7 @@ rm %{buildroot}%{_tmpfilesdir}/nix-daemon.conf
 install -Dm644 %{SOURCE1} %{buildroot}%{_sysusersdir}/nix.conf
 install -Dm644 %{SOURCE2} %{buildroot}%{_user_tmpfilesdir}/nix.conf
 install -Dm644 %{SOURCE3} %{buildroot}%{_tmpfilesdir}/nix.conf
-install -Dm644 %{SOURCE4} %{buildroot}%{_datadir}/selinux/packages/%{selinuxtype}/%{modulename}.pp
+install -Dm644 %{modulename}.pp %{buildroot}%{_datadir}/selinux/packages/%{selinuxtype}/%{modulename}.pp
 
 
 %check
