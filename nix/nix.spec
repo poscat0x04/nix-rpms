@@ -4,8 +4,8 @@
 
 Name:           nix
 Version:        2.22.1
-Release:        %autorelease
-Summary:        Nix, the purely functional package manager
+Release:        2%{?dist}
+Summary:        A purely functional package manager
 
 License:        LGPL-2.1-or-later
 URL:            https://github.com/NixOS/nix
@@ -15,6 +15,7 @@ Source2:        nix.user.tmpfiles
 Source3:        nix.tmpfiles
 Source4:        nix.te
 Source5:        nix.fc
+Source6:        nix.conf
 
 BuildRequires:  gcc-c++
 BuildRequires:  autoconf-archive
@@ -65,7 +66,7 @@ Requires(post):  systemd
 Requires(preun): systemd
 
 %description
-Nix is a powerful package manager for Linux and other Unix systems
+A powerful package manager for Linux and other Unix systems
 that makes package management reliable and reproducible.
 
 
@@ -97,7 +98,6 @@ Requires(post): policycoreutils-python-utils
 SELinux policy modules for Nix
 
 
-
 %prep
 %autosetup
 cp COPYING LICENSE
@@ -126,10 +126,12 @@ autoreconf -vfi
 %make_install
 rm %{buildroot}%{_docdir}/nix/manual/.nojekyll
 rm %{buildroot}%{_tmpfilesdir}/nix-daemon.conf
+rm -rf %{buildroot}%{_sysconfdir}/init
 install -Dm644 %{SOURCE1} %{buildroot}%{_sysusersdir}/nix.conf
 install -Dm644 %{SOURCE2} %{buildroot}%{_user_tmpfilesdir}/nix.conf
 install -Dm644 %{SOURCE3} %{buildroot}%{_tmpfilesdir}/nix.conf
 install -Dm644 %{modulename}.pp %{buildroot}%{_datadir}/selinux/packages/%{selinuxtype}/%{modulename}.pp
+install -Dm644 %{SOURCE6} %{buildroot}%{_sysconfdir}/nix/nix.conf
 
 
 %check
@@ -139,7 +141,7 @@ install -Dm644 %{modulename}.pp %{buildroot}%{_datadir}/selinux/packages/%{selin
 %license LICENSE
 %doc README.md
 
-%config(noreplace) /etc/init/nix-daemon.conf
+%config(noreplace) %{_sysconfdir}/nix/nix.conf
 %{_sysconfdir}/profile.d/nix*sh
 
 %{_bindir}/nix*
