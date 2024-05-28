@@ -65,6 +65,8 @@ Requires:       (%{name}-selinux = %{version}-%{release} if selinux-policy-%{sel
 Requires(post):  systemd
 Requires(preun): systemd
 
+Recommends:     %{name}-docs = %{version}-%{release}
+
 %description
 A powerful package manager for Linux and other Unix systems
 that makes package management reliable and reproducible.
@@ -83,6 +85,13 @@ Requires:       %{name}-libs = %{version}-%{release}
 
 %description devel
 Header files, libraries and pkg-config files for %{name}-libs
+
+
+%package docs
+Summary:        Nix reference manual
+
+%description docs
+Reference manual for Nix
 
 
 %package selinux
@@ -156,7 +165,6 @@ install -Dm644 %{SOURCE6} %{buildroot}%{_sysconfdir}/nix/nix.conf
 %{fish_completions_dir}/nix.fish
 %{zsh_completions_dir}/{_nix,run-help-nix}
 
-%{_docdir}/nix
 %{_mandir}/man1/nix*.gz
 %{_mandir}/man5/nix*.gz
 %{_mandir}/man8/nix*.gz
@@ -165,6 +173,10 @@ install -Dm644 %{SOURCE6} %{buildroot}%{_sysconfdir}/nix/nix.conf
 %files libs
 %license LICENSE
 %{_libdir}/libnix*.so
+
+
+%files docs
+%{_docdir}/nix/manual
 
 
 %files devel
