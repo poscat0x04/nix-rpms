@@ -4,7 +4,7 @@
 
 Name:           nix
 Version:        2.22.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A purely functional package manager
 
 License:        LGPL-2.1-or-later
@@ -22,6 +22,7 @@ BuildRequires:  autoconf-archive
 BuildRequires:  automake
 BuildRequires:  bison
 BuildRequires:  flex
+BuildRequires:  graphviz
 BuildRequires:  jq
 BuildRequires:  mdbook
 BuildRequires:  mdbook-linkcheck
@@ -50,6 +51,7 @@ BuildRequires:  libcpuid-devel
 
 BuildRequires:  libsodium-devel
 BuildRequires:  libgit2-devel
+BuildRequires:  lowdown-devel
 BuildRequires:  json-devel
 BuildRequires:  sqlite-devel
 
