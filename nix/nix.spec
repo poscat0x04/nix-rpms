@@ -4,7 +4,7 @@
 
 Name:           nix
 Version:        2.22.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A purely functional package manager
 
 License:        LGPL-2.1-or-later
