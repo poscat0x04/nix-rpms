@@ -4,7 +4,7 @@
 
 Name:           nix
 Version:        2.22.1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A purely functional package manager
 
 License:        LGPL-2.1-or-later
@@ -16,6 +16,7 @@ Source3:        nix.tmpfiles
 Source4:        nix.te
 Source5:        nix.fc
 Source6:        nix.conf
+Source7:        99-build-dir.conf
 
 BuildRequires:  gcc-c++
 BuildRequires:  autoconf-archive
@@ -143,6 +144,7 @@ install -Dm644 %{SOURCE2} %{buildroot}%{_user_tmpfilesdir}/nix.conf
 install -Dm644 %{SOURCE3} %{buildroot}%{_tmpfilesdir}/nix.conf
 install -Dm644 %{modulename}.pp %{buildroot}%{_datadir}/selinux/packages/%{selinuxtype}/%{modulename}.pp
 install -Dm644 %{SOURCE6} %{buildroot}%{_sysconfdir}/nix/nix.conf
+install -Dm644 %{SOURCE7} %{buildroot}%{_unitdir}/nix-daemon.service.d/99-build-dir.conf
 
 
 %check
@@ -158,7 +160,7 @@ install -Dm644 %{SOURCE6} %{buildroot}%{_sysconfdir}/nix/nix.conf
 %{_bindir}/nix*
 %{_libexecdir}/nix/build-remote
 
-%{_unitdir}/nix-daemon.{service,socket}
+%{_unitdir}/nix-daemon.{service,service.d,socket}
 %{_tmpfilesdir}/nix.conf
 %{_user_tmpfilesdir}/nix.conf
 %{_sysusersdir}/nix.conf
