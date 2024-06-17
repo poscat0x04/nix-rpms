@@ -1,7 +1,7 @@
 %define commit ff6af6fc683159deb51c543b065eba14dfcf329b
 
 Name:           rapidcheck
-Version:        0^ff6af6f
+Version:        0
 Release:        %autorelease
 Summary:        A C++ framework for property based testing
 
