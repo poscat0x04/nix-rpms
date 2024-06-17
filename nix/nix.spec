@@ -3,8 +3,8 @@
 %global modulename nix
 
 Name:           nix
-Version:        2.22.1
-Release:        5%{?dist}
+Version:        2.23.0
+Release:        1%{?dist}
 Summary:        A purely functional package manager
 
 License:        LGPL-2.1-or-later
@@ -64,6 +64,7 @@ BuildRequires:  policycoreutils
 
 Requires:       %{name}-libs = %{version}-%{release}
 Requires:       (%{name}-selinux = %{version}-%{release} if selinux-policy-%{selinuxtype})
+Requires:       busybox-nix
 
 Requires(post):  systemd
 Requires(preun): systemd
