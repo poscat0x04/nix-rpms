@@ -4,7 +4,7 @@
 
 Name:           nix
 Version:        2.23.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A purely functional package manager
 
 License:        LGPL-2.1-or-later
@@ -93,6 +93,7 @@ Header files, libraries and pkg-config files for %{name}-libs
 
 %package docs
 Summary:        Nix reference manual
+BuildArch:      noarch
 
 %description docs
 Reference manual for Nix
