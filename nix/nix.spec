@@ -4,7 +4,7 @@
 
 Name:           nix
 Version:        2.23.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A purely functional package manager
 
 License:        LGPL-2.1-or-later
@@ -17,6 +17,7 @@ Source4:        nix.te
 Source5:        nix.fc
 Source6:        nix.conf
 Source7:        99-build-dir.conf
+Source8:        nix-registry.json
 
 BuildRequires:  gcc-c++
 BuildRequires:  autoconf-archive
@@ -147,6 +148,7 @@ install -Dm644 %{SOURCE3} %{buildroot}%{_tmpfilesdir}/nix.conf
 install -Dm644 %{modulename}.pp %{buildroot}%{_datadir}/selinux/packages/%{selinuxtype}/%{modulename}.pp
 install -Dm644 %{SOURCE6} %{buildroot}%{_sysconfdir}/nix/nix.conf
 install -Dm644 %{SOURCE7} %{buildroot}%{_unitdir}/nix-daemon.service.d/99-build-dir.conf
+install -Dm644 %{SOURCE8} %{buildroot}%{_sysconfdir}/nix/registry.json
 
 
 %check
@@ -157,6 +159,7 @@ install -Dm644 %{SOURCE7} %{buildroot}%{_unitdir}/nix-daemon.service.d/99-build-
 %doc README.md
 
 %config(noreplace) %{_sysconfdir}/nix/nix.conf
+%config(noreplace) %{_sysconfdir}/nix/registry.json
 %{_sysconfdir}/profile.d/nix*sh
 
 %{_bindir}/nix*
